@@ -37,8 +37,8 @@ const login = async (req, res) => {
 
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
-            secure: config.nodeEnv === 'production',
-            sameSite: 'Lax',
+            secure: true,
+            sameSite: 'None',
             maxAge: 60 * 60 * 1000, // 1 hour
         })
 
@@ -108,8 +108,8 @@ const register = async (req, res) => {
 
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
-            secure: config.nodeEnv === 'production',
-            sameSite: 'Lax',
+            secure: true,
+            sameSite: 'None',
             maxAge: 60 * 60 * 1000, // 1 hour
         })
 
