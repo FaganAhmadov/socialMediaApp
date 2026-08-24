@@ -14,6 +14,9 @@ app.use(corsMiddleware);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.listen(config.port, () => {
+    console.log(`Server running on ${config.port}`);
+});
 // file reqden almaq ucun
 app.use("/api/v1", router)
 app.use('/uploads', express.static(path.join(__dirname, './uploads')));

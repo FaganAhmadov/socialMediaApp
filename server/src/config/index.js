@@ -11,7 +11,10 @@ const config = {
     nodeEnv: process.env.NODE_ENV,
     email: process.env.EMAIL_USER,
     emailPassword: process.env.EMAIL_PASSWORD,
-    corsOrigin1: process.env.CORS_ORIGIN_1
+    corsOrigin1: process.env.CORS_ORIGIN_1,
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 }
 
 module.exports = config;

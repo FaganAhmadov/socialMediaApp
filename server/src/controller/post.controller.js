@@ -1,14 +1,21 @@
 const postModel = require("../models/post.model")
+const uploadToCloudinary = require("../utils/uploadToCloudnary")
 
 const createPost = async (req, res) => {
     try {
         const { description } = req.body
         const file = req.file
-
+        let imgUrl = null
+        if (file) {
+            const uploaded = await uploadToCloudinary(
+                file.buffer
+            );
+            imgUrl = uploaded.secure_url
+        }
 
         await postModel.create({
             description,
-            postImage: file.filename,
+            postImage: imgUrl,
             userID: req.user._id
         })
         res.status(200).json({
@@ -30,18 +37,22 @@ const getAllActivePosts = async (req, res) => {
         const posts = await postModel.find({
             isActive: true,
             isDelete: false
-        }).populate('userID', 'username')
+        })
+            .populate('userID', 'username')
+            .sort({ createdAt: -1 });
+
         res.status(200).json({
             ok: true,
             message: 'Active posts fetched successfully',
             data: posts
-        })
+        });
+
     } catch (error) {
         res.status(500).json({
             ok: false,
             message: 'Error fetching active posts',
             error: error.message
-        })
+        });
     }
 }
 

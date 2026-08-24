@@ -57,7 +57,7 @@ const Feed = () => {
 
                     {/* Image */}
                     <img
-                        src={`http://localhost:3000/uploads/${post.postImage}`}
+                        src={`${post.postImage}`}
                         alt={post.description}
                         className="h-80 w-full object-cover"
                     />
