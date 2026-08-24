@@ -23,19 +23,24 @@
 
 // module.exports = upload;
 
-
-const multer = require("multer")
-const storage = multer.memoryStorage(); 
+const multer = require("multer");
+const storage = multer.memoryStorage();
 
 const fileFilter = function (req, file, cb) {
-    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
+    const allowedTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif"
+    ];
 
-    if (!allowedTypes.includes(file.mimetype)) {
+    if (allowedTypes.includes(file.mimetype)) {
         cb(null, true);
     } else {
         cb(new Error("file type not allowed"), false);
     }
-}
+};
+
 const limits = {
     fileSize: 5 * 1024 * 1024 // 5MB
 };
