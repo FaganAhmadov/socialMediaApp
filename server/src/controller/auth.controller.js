@@ -55,17 +55,22 @@ const login = async (req, res) => {
     }
 }
 
-const adminLogin = async (req, res) => {
-}
 
 const logout = async (req, res) => {
     try {
-        res.clearCookie('accessToken')
-        res.json({
-            message: 'Logout SuccessFully'
+        res.clearCookie('accessToken', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None',
+        })
+
+        return res.status(200).json({
+            ok: true,
+            message: 'Logout Successfully'
         })
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
+            ok: false,
             message: 'Internal server error',
             error: error.message
         })
@@ -292,6 +297,9 @@ const checkToken = async (req, res) => {
             error: error.message
         })
     }
+}
+
+const adminLogin = async (req, res) => {
 }
 
 module.exports = {
