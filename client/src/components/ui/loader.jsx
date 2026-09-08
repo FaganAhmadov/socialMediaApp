@@ -7,7 +7,7 @@ const Loader = () => {
                 <div className="w-16 h-16 rounded-full border-4 border-blue-100 border-t-blue-600 animate-spin"></div>
 
                 <div className="text-center">
-                    <h2 className="text-lg font-bold text-gray-800">SocialMediaPro</h2>
+                    <h2 className="text-lg font-bold text-gray-800">SocialFlow</h2>
                     <p className="text-sm text-gray-500 mt-1 animate-pulse">
                         Loading your feed...
                     </p>

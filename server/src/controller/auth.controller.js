@@ -79,7 +79,17 @@ const logout = async (req, res) => {
 
 const register = async (req, res) => {
     try {
-        const { email, password, confirmPassword, username } = req.body;
+        const {
+            email,
+            password,
+            confirmPassword,
+            username,
+            firstName = '',
+            lastName = '',
+            avatar,
+            profilePicture
+        } = req.body;
+
         const userNameExist = await userModel.findOne({ username })
         if (userNameExist) {
             return res.status(409).json({
@@ -99,11 +109,16 @@ const register = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
+        const avatarUrl = avatar || profilePicture || null;
 
         const newUser = await userModel.create({
             username,
             password: hashedPassword,
-            email
+            email,
+            firstName,
+            lastName,
+            avatar: avatarUrl,
+            profilePicture: avatarUrl
         })
         const accessToken = jwt.sign(
             { id: newUser._id },

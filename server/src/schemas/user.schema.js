@@ -10,7 +10,7 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-        select:false
+        select: false
     },
     username: {
         type: String,
@@ -19,7 +19,21 @@ const userSchema = mongoose.Schema({
         require: true,
         unique: true
     },
+    firstName: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    lastName: {
+        type: String,
+        default: '',
+        trim: true
+    },
     avatar: {
+        type: String,
+        default: null
+    },
+    profilePicture: {
         type: String,
         default: null
     },

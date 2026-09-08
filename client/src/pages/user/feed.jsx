@@ -8,35 +8,35 @@ const Feed = () => {
     useEffect(() => {
         (async () => {
             try {
-                const data = await getAllActivePostsForFeed()
-                setPosts(data.data)
+                const data = await getAllActivePostsForFeed();
+                setPosts(data.data);
             } catch (error) {
-                toast.error(error)
+                toast.error(error);
             }
-        })()
+        })();
     }, [])
 
     return (
-        <div className="max-w-2xl mx-auto space-y-6">
-            <div className="bg-white rounded-3xl shadow-sm border p-5">
+        <div className="mx-auto w-full max-w-2xl space-y-6">
+            <div className="rounded-3xl border bg-white p-4 shadow-sm sm:p-5">
                 <div className="flex items-center gap-3">
                     <img
                         src="https://i.pravatar.cc/60?img=5"
                         alt="user"
-                        className="w-12 h-12 rounded-full object-cover"
+                        className="h-12 w-12 rounded-full object-cover"
                     />
 
                     <input
                         type="text"
                         placeholder="What’s on your mind?"
-                        className="flex-1 bg-gray-100 rounded-full px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="min-w-0 flex-1 rounded-full bg-gray-100 px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
 
-                <div className="flex items-center justify-between mt-4 pt-4 border-t text-sm font-medium text-gray-600">
-                    <button className="flex-1 py-2 rounded-xl hover:bg-gray-100">📷 Photo</button>
-                    <button className="flex-1 py-2 rounded-xl hover:bg-gray-100">🎥 Video</button>
-                    <button className="flex-1 py-2 rounded-xl hover:bg-gray-100">😊 Feeling</button>
+                <div className="mt-4 grid grid-cols-3 gap-2 border-t pt-4 text-sm font-medium text-gray-600">
+                    <button className="rounded-xl py-2 hover:bg-gray-100">📷 Photo</button>
+                    <button className="rounded-xl py-2 hover:bg-gray-100">🎥 Video</button>
+                    <button className="rounded-xl py-2 hover:bg-gray-100">😊 Feeling</button>
                 </div>
             </div>
             {posts.map((post) => (
@@ -50,7 +50,7 @@ const Feed = () => {
                             {post.userID.username?.[0]?.toUpperCase()}
                         </div>
 
-                        <span className="text-sm font-semibold">
+                        <span className="truncate text-sm font-semibold">
                             {post.userID.username}
                         </span>
                     </div>
@@ -59,7 +59,7 @@ const Feed = () => {
                     <img
                         src={`${post.postImage}`}
                         alt={post.description}
-                        className="h-80 w-full object-cover"
+                        className="h-56 w-full object-cover sm:h-80"
                     />
 
                     {/* Content */}

@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getCurrentUser } from '../../services/auth.service';
 
 const Sidebar = () => {
+  const user = getCurrentUser();
+  const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(' ') || user?.username || 'SocialFlow User';
+  const avatar = user?.avatar || user?.profilePicture || 'https://i.pravatar.cc/80?img=12';
+
   return (
     <aside className="w-full lg:w-72">
       <div className="sticky top-24 rounded-3xl border bg-white p-5 shadow-sm">
@@ -9,18 +14,18 @@ const Sidebar = () => {
         {/* Profile */}
         <div className="mb-6 flex items-center gap-3">
           <img
-            src="https://i.pravatar.cc/80?img=12"
+            src={avatar}
             alt="profile"
             className="h-14 w-14 rounded-full object-cover"
           />
 
-          <div>
-            <h3 className="font-bold text-gray-800">
-              Fagan Ahmadov
+          <div className="min-w-0">
+            <h3 className="truncate font-bold text-gray-800">
+              {fullName}
             </h3>
 
-            <p className="text-sm text-gray-500">
-              Frontend Developer
+            <p className="truncate text-sm text-gray-500">
+              {user?.username ? `@${user.username}` : 'Member'}
             </p>
           </div>
         </div>
