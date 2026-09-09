@@ -1,5 +1,9 @@
 const config = require('../config');
-const allowedOrigins = [config.corsOrigin1];
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://sociall-flow.vercel.app',
+    config.corsOrigin1
+].filter(Boolean);
 const corsMiddleware = (req, res, next) => {
     const origin = req.headers.origin;
 
