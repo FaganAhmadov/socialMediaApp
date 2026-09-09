@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { register } from '../../services/auth.service';
 
 const Register = () => {
@@ -23,11 +24,18 @@ const Register = () => {
 
     const formSubmit = async (e) => {
         e.preventDefault();
+
         try {
-            await register(data);
-            navigate('/');
+            const response = await register(data);
+            const successMessage = response?.message || 'User created successfully';
+            toast.success(successMessage);
+
+            setTimeout(() => {
+                navigate('/');
+            }, 350);
         } catch (error) {
-            console.log(error, 'error');
+            const message = typeof error === 'string' ? error : error?.message || 'Something went wrong';
+            toast.error(message);
         }
     };
 
